@@ -10,48 +10,54 @@ class ResourceMerger
     {
         if (args.Length != 2)
         {
-            Console.WriteLine("Usage: ResourceMerger.exe <ExePath> <DllPath>");
+            Console.WriteLine("Usage: ResourceMerger.exe <TargetAssembly> <SourceAssembly>");
             return;
         }
 
-        string exePath = args[0];
-        string dllPath = args[1];
+        string targetAssemblyPath = args[0];
+        string sourceAssemblyPath = args[1];
 
-        if (!File.Exists(exePath) || !File.Exists(dllPath))
+        if (!File.Exists(targetAssemblyPath) || !File.Exists(sourceAssemblyPath))
         {
             Console.WriteLine("Error: One or both files do not exist.");
             return;
         }
 
-        string outputPath = Path.Combine(
-            Path.GetDirectoryName(exePath),
-            Path.GetFileNameWithoutExtension(exePath) + "_Merged.exe"
+        Console.WriteLine($"Target Assembly: {Path.GetFileName(targetAssemblyPath)}");
+        Console.WriteLine($"Source Assembly: {Path.GetFileName(sourceAssemblyPath)}");
+
+        string mergedAssemblyOutputPath = Path.Combine(
+            Path.GetDirectoryName(targetAssemblyPath),
+            Path.GetFileNameWithoutExtension(targetAssemblyPath) + "_Merged" + Path.GetExtension(targetAssemblyPath)
         );
 
-        ModuleDefMD exe = ModuleDefMD.Load(exePath);
-        ModuleDefMD dll = ModuleDefMD.Load(dllPath);
-        
-        foreach (var res in dll.Resources)
+        ModuleDefMD targetModule = ModuleDefMD.Load(targetAssemblyPath);
+        ModuleDefMD sourceModule = ModuleDefMD.Load(sourceAssemblyPath);
+
+        foreach (var resource in sourceModule.Resources)
         {
-            if (res is EmbeddedResource embedded)
+            if (resource is EmbeddedResource embeddedResource)
             {
-                Console.WriteLine($"Embedding resource: {embedded.Name}");
-                var data = embedded.CreateReader().ToArray();
-                exe.Resources.Add(new EmbeddedResource(embedded.Name, data, embedded.Attributes));
-            }
-        }
-        
-        for (int i = exe.Resources.Count - 1; i >= 0; i--)
-        {
-            if (exe.Resources[i] is AssemblyLinkedResource alr &&
-                alr.Assembly.Name == dll.Assembly.Name)
-            {
-                Console.WriteLine($"Removing AssemblyLinkedResource: {alr.Name}");
-                exe.Resources.RemoveAt(i);
+                Console.WriteLine($"Embedding resource: {embeddedResource.Name}");
+                byte[] resourceData = embeddedResource.CreateReader().ToArray();
+                targetModule.Resources.Add(new EmbeddedResource(
+                    embeddedResource.Name,
+                    resourceData,
+                    embeddedResource.Attributes));
             }
         }
 
-        exe.Write(outputPath);
-        Console.WriteLine("Merged EXE saved to: " + outputPath);
+        for (int i = targetModule.Resources.Count - 1; i >= 0; i--)
+        {
+            if (targetModule.Resources[i] is AssemblyLinkedResource linkedResource &&
+                linkedResource.Assembly.Name == sourceModule.Assembly.Name)
+            {
+                Console.WriteLine($"Removing AssemblyLinkedResource: {linkedResource.Name}");
+                targetModule.Resources.RemoveAt(i);
+            }
+        }
+
+        targetModule.Write(mergedAssemblyOutputPath);
+        Console.WriteLine("Merged output saved to: " + mergedAssemblyOutputPath);
     }
 }
