@@ -1,0 +1,6 @@
+# Editors
+/.idea
+
+# Builds
+/bin
+/obj
