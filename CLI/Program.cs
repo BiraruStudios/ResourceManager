@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using dnlib.DotNet;
+using dnlib.DotNet.Writer;
 
 namespace CLI
 {
@@ -59,12 +60,15 @@ namespace CLI
             );
 
             ModuleDefMD targetModule = ModuleDefMD.Load(targetAssembly);
+            var targetOptions = new ModuleWriterOptions(targetModule);
             ModuleDefMD sourceModule = ModuleDefMD.Load(sourceAssembly);
+            
+            targetOptions.MetadataOptions.Flags |= MetadataFlags.KeepOldMaxStack;
 
             EmbedResources(targetModule, sourceModule);
             RemoveAssemblyLinkedResources(targetModule, sourceModule);
 
-            targetModule.Write(mergedOutputPath);
+            targetModule.Write(mergedOutputPath, targetOptions);
             Console.WriteLine($"Merged output saved to: {mergedOutputPath}");
         }
 
