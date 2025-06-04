@@ -1,5 +1,4 @@
-﻿
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -29,7 +28,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="dnlib" Version="4.5.0" />
+        <PackageReference Include="Costura.Fody" Version="6.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="dnlib" Version="4.5.0"/>
+        <PackageReference Include="Fody" Version="6.9.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
 </Project>
