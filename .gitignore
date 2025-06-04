@@ -2,6 +2,9 @@
 /.idea
 /.vs
 
+# Editor Files
+*.DotSettings.user
+
 # Builds
 /CLI/bin
 /CLI/obj
