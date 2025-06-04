@@ -1,0 +1,35 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>CLI</RootNamespace>
+        <Title>ResourceManager</Title>
+        <Authors>Biraru</Authors>
+        <Description>ResourceMerger is a .NET utility that merges embedded resources from one assembly into another.</Description>
+        <RepositoryUrl>https://github.com/BiraruStudios/ResourceMerger</RepositoryUrl>
+        <PackageId>ResourceManager.CLI</PackageId>
+        <Copyright>Copyright © 2025 Biraru Studio's</Copyright>
+        <PackageProjectUrl>https://github.com/BiraruStudios/ResourceMerger</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/BiraruStudios/ResourceMerger/LICENSE</PackageLicenseUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>resources;cli;merging;tools</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Company>Biraru Studio's</Company>
+        <Product>ResourceManager.CLI</Product>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <NeutralLanguage>en</NeutralLanguage>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>CLI.snk</AssemblyOriginatorKeyFile>
+        <PublicSign>true</PublicSign>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="dnlib" Version="4.5.0" />
+    </ItemGroup>
+
+</Project>

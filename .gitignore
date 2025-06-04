@@ -1,0 +1,9 @@
+# Editor
+/.idea
+
+# Builds
+/CLI/bin
+/CLI/obj
+
+# Private Key
+/CLI/CLI-Private.snk
