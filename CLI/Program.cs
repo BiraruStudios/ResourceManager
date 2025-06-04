@@ -22,8 +22,8 @@ namespace CLI
                 return;
             }
 
-            string targetAssembly = Path.GetFullPath(args[0]);
-            string sourceAssembly = Path.GetFullPath(args[1]);
+            var targetAssembly = Path.GetFullPath(args[0]);
+            var sourceAssembly = Path.GetFullPath(args[1]);
 
             if (!File.Exists(targetAssembly))
             {
@@ -36,8 +36,8 @@ namespace CLI
                 return;
             }
 
-            string targetExtension = Path.GetExtension(targetAssembly);
-            string sourceExtension = Path.GetExtension(sourceAssembly);
+            var targetExtension = Path.GetExtension(targetAssembly);
+            var sourceExtension = Path.GetExtension(sourceAssembly);
 
             if (!IsValidExtension(targetExtension))
             {
@@ -53,7 +53,7 @@ namespace CLI
             Console.WriteLine($"Target Assembly: {targetAssembly}");
             Console.WriteLine($"Source Assembly: {sourceAssembly}");
 
-            string mergedOutputPath = Path.Combine(
+            var mergedOutputPath = Path.Combine(
                 Path.GetDirectoryName(targetAssembly)!,
                 Path.GetFileNameWithoutExtension(targetAssembly) + "_Merged" + targetExtension
             );
@@ -80,7 +80,7 @@ namespace CLI
                 if (resource is EmbeddedResource embedded)
                 {
                     Console.WriteLine($"Embedding resource: {embedded.Name}");
-                    byte[] data = embedded.CreateReader().ToArray();
+                    var data = embedded.CreateReader().ToArray();
 
                     target.Resources.Add(new EmbeddedResource(
                         embedded.Name,
@@ -93,7 +93,7 @@ namespace CLI
 
         private static void RemoveAssemblyLinkedResources(ModuleDefMD target, ModuleDefMD source)
         {
-            for (int i = target.Resources.Count - 1; i >= 0; i--)
+            for (var i = target.Resources.Count - 1; i >= 0; i--)
             {
                 if (target.Resources[i] is AssemblyLinkedResource linked &&
                     linked.Assembly.Name == source.Assembly.Name)
