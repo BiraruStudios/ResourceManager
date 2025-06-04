@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Reflection;
 using dnlib.DotNet;
 
 namespace CLI
@@ -8,9 +10,15 @@ namespace CLI
 
         public static void Main(string[] args)
         {
+            var exeName = Path.GetFileName(Assembly.GetEntryAssembly()?.Location);
+            if (string.IsNullOrEmpty(exeName))
+            {
+                exeName = Path.GetFileName(Process.GetCurrentProcess().MainModule?.FileName ?? "");
+            }
+            
             if (args.Length != 2)
             {
-                Console.WriteLine("Usage: ResourceMerger.exe <TargetAssembly> <SourceAssembly>");
+                Console.WriteLine($"Usage: {exeName} <TargetAssembly> <SourceAssembly>");
                 return;
             }
 
