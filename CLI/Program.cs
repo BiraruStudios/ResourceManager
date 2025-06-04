@@ -15,7 +15,7 @@ namespace CLI
             {
                 exeName = Path.GetFileName(Process.GetCurrentProcess().MainModule?.FileName ?? "");
             }
-            
+
             if (args.Length != 2)
             {
                 Console.WriteLine($"Usage: {exeName} <TargetAssembly> <SourceAssembly>");
