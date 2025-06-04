@@ -44,7 +44,7 @@ namespace CLI
 
             Console.WriteLine($"Target Assembly: {targetAssembly}");
             Console.WriteLine($"Source Assembly: {sourceAssembly}");
-            
+
             string mergedOutputPath = Path.Combine(
                 Path.GetDirectoryName(targetAssembly)!,
                 Path.GetFileNameWithoutExtension(targetAssembly) + "_Merged" + targetExtension
