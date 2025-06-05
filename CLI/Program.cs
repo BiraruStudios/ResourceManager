@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Reflection;
 using dnlib.DotNet;
 using dnlib.DotNet.Writer;
+using Spectre.Console;
 
 namespace CLI
 {
@@ -11,6 +12,12 @@ namespace CLI
 
         public static void Main(string[] args)
         {
+            AnsiConsole.WriteLine();
+            AnsiConsole.Write(new FigletText("ResourceMerger").Centered().Color(Color.Yellow));
+            AnsiConsole.WriteLine();
+            AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
+            AnsiConsole.WriteLine();
+
             var exeName = Path.GetFileName(Assembly.GetEntryAssembly()?.Location);
             if (string.IsNullOrEmpty(exeName))
             {
@@ -19,7 +26,10 @@ namespace CLI
 
             if (args.Length != 2)
             {
-                Console.WriteLine($"Usage: {exeName} <TargetAssembly> <SourceAssembly>");
+                AnsiConsole.Write(
+                    new Markup(
+                            $"[grey]Usage:[/] [bold yellow]{exeName}[/] [lightgreen]<TargetAssembly>[/] [lightgreen]<SourceAssembly>[/]")
+                        .Centered());
                 return;
             }
 
@@ -28,12 +38,12 @@ namespace CLI
 
             if (!File.Exists(targetAssembly))
             {
-                Console.WriteLine("Error: Target file not found.");
+                AnsiConsole.Write(new Markup("[red bold]Error:[/] [yellow]Target file not found.[/]").Centered());
                 return;
             }
             else if (!File.Exists(sourceAssembly))
             {
-                Console.WriteLine("Error: Source file not found.");
+                AnsiConsole.Write(new Markup("[red bold]Error:[/] [yellow]Source file not found.[/]").Centered());
                 return;
             }
 
@@ -42,17 +52,19 @@ namespace CLI
 
             if (!IsValidExtension(targetExtension))
             {
-                Console.WriteLine("Error: Target file must be a .dll or .exe.");
+                AnsiConsole.Write(new Markup("[red bold]Error:[/] [yellow]Target file must be a .exe or .dll.[/]")
+                    .Centered());
                 return;
             }
             else if (!IsValidExtension(sourceExtension))
             {
-                Console.WriteLine("Error: Source file must be a .dll or .exe.");
+                AnsiConsole.Write(new Markup("[red bold]Error:[/] [yellow]Source file must be a .exe or .dll.[/]")
+                    .Centered());
                 return;
             }
 
-            Console.WriteLine($"Target Assembly: {targetAssembly}");
-            Console.WriteLine($"Source Assembly: {sourceAssembly}");
+            AnsiConsole.Write(new Markup($"[grey]Target Assembly:[/] [lightgreen]{targetAssembly}[/]").Centered());
+            AnsiConsole.Write(new Markup($"[grey]Source Assembly:[/] [lightgreen]{sourceAssembly}[/]").Centered());
 
             var mergedOutputPath = Path.Combine(
                 Path.GetDirectoryName(targetAssembly)!,
@@ -62,14 +74,14 @@ namespace CLI
             ModuleDefMD targetModule = ModuleDefMD.Load(targetAssembly);
             var targetOptions = new ModuleWriterOptions(targetModule);
             ModuleDefMD sourceModule = ModuleDefMD.Load(sourceAssembly);
-            
+
             targetOptions.MetadataOptions.Flags |= MetadataFlags.KeepOldMaxStack;
 
             EmbedResources(targetModule, sourceModule);
             RemoveAssemblyLinkedResources(targetModule, sourceModule);
 
             targetModule.Write(mergedOutputPath, targetOptions);
-            Console.WriteLine($"Merged output saved to: {mergedOutputPath}");
+            AnsiConsole.Write(new Markup($"[lightgreen]Merged output saved to: {mergedOutputPath}[/]").Centered());
         }
 
         private static bool IsValidExtension(string ext)
@@ -83,7 +95,7 @@ namespace CLI
             {
                 if (resource is EmbeddedResource embedded)
                 {
-                    Console.WriteLine($"Embedding resource: {embedded.Name}");
+                    AnsiConsole.Write(new Markup($"[grey]Embedding:[/] [aqua]{embedded.Name}[/]").Centered());
                     var data = embedded.CreateReader().ToArray();
 
                     target.Resources.Add(new EmbeddedResource(
@@ -102,7 +114,8 @@ namespace CLI
                 if (target.Resources[i] is AssemblyLinkedResource linked &&
                     linked.Assembly.Name == source.Assembly.Name)
                 {
-                    Console.WriteLine($"Removing AssemblyLinkedResource: {linked.Name}");
+                    AnsiConsole.Write(new Markup($"[grey]Removing AssemblyLinkedResource:[/] [aqua]{linked.Name}[/]")
+                        .Centered());
                     target.Resources.RemoveAt(i);
                 }
             }
