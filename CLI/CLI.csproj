@@ -27,10 +27,21 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>CLI.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
+        <PackageReadmeFile>../README.md</PackageReadmeFile>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <Deterministic>true</Deterministic>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <RepositoryBranch>main</RepositoryBranch>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
         <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <Optimize>true</Optimize>
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
     <ItemGroup>
