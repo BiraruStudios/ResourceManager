@@ -20,9 +20,9 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Company>Biraru Studios</Company>
         <Product>ResourceMerger.CLI</Product>
-        <Version>1.1.0</Version>
-        <AssemblyVersion>1.1.0</AssemblyVersion>
-        <FileVersion>1.1.0</FileVersion>
+        <Version>1.2.0</Version>
+        <AssemblyVersion>1.2.0</AssemblyVersion>
+        <FileVersion>1.2.0</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>CLI.snk</AssemblyOriginatorKeyFile>
