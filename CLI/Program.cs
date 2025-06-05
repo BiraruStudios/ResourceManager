@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Reflection;
 using dnlib.DotNet;
 using dnlib.DotNet.Writer;
 using Spectre.Console;
@@ -18,9 +17,7 @@ public static class Program
         AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
         AnsiConsole.WriteLine();
 
-        var exeName = Path.GetFileName(Assembly.GetEntryAssembly()?.Location);
-        if (string.IsNullOrEmpty(exeName))
-            exeName = Path.GetFileName(Process.GetCurrentProcess().MainModule?.FileName ?? "");
+        var exeName = Path.GetFileName(Process.GetCurrentProcess().MainModule?.FileName ?? "");
 
         if (args.Length != 2)
         {
