@@ -1,12 +1,16 @@
-# V1.1.0
+# Changelog
 
-- Update .gitignore
-- Add Full PDB To Debug Configuration
-- Reformat FodyWeavers.xsd
-- Reformat Program.cs
-- Add Fody And Costura
-- Add Version Prefix
+## 📦 v1.1.0 – Enhancements & Tooling Integration
 
-# V1.0.0
+- ➕ Added [Fody](https://github.com/Fody/Fody) and [Costura](https://github.com/Fody/Costura) for IL weaving and resource embedding
+- 🐞 Enabled full PDB generation for `Debug` configuration
+- 🎨 Reformatted `Program.cs` for improved readability
+- 🧼 Reformatted `FodyWeavers.xsd` to match XML formatting standards
+- 🔧 Updated `.gitignore` with relevant exclusions
+- 🏷 Added version prefixing support to the project configuration
 
-- Add Basic Functionality
+---
+
+## 🚀 v1.0.0 – Initial Release
+
+- ✅ Implemented basic functionality for merging embedded resources between assemblies
