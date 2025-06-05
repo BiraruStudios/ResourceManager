@@ -6,21 +6,22 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>CLI</RootNamespace>
-        <Title>ResourceManager</Title>
+        <Title>ResourceMerger</Title>
         <Authors>Biraru</Authors>
         <Description>ResourceMerger is a .NET utility that merges embedded resources from one assembly into another.</Description>
         <RepositoryUrl>https://github.com/BiraruStudios/ResourceMerger</RepositoryUrl>
-        <PackageId>ResourceManager.CLI</PackageId>
+        <PackageId>ResourceMerger.CLI</PackageId>
         <Copyright>Copyright © 2025 Biraru Studio's</Copyright>
         <PackageProjectUrl>https://github.com/BiraruStudios/ResourceMerger</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/BiraruStudios/ResourceMerger/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
         <RepositoryType>git</RepositoryType>
         <PackageTags>resources;cli;merging;tools</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <Company>Biraru Studio's</Company>
-        <Product>ResourceManager.CLI</Product>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <Company>Biraru Studios</Company>
+        <Product>ResourceMerger.CLI</Product>
+        <Version>1.1.0</Version>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <FileVersion>1.1.0</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>CLI.snk</AssemblyOriginatorKeyFile>
