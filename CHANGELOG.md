@@ -2,6 +2,10 @@
 
 ## 📦 v1.2.0 – CLI Polish, Metadata Refinement & UX Enhancements
 
+- 🧾 **Chore:** Update `CHANGELOG.md` with new commits
+- 💡 **Refactor:** Extract banner and validation logic into separate methods
+- 🧾 **Chore:** Bump version and update `CHANGELOG.md`
+- 🏗 **Build:** Add metadata and CI optimizations to project file
 * 🎯 **Fix:** Correctly determine `exeName` for usage and help output
 * 🧹 **Chore:** Reformat `Program.cs` for consistency and readability
 * ✨ **Feat:** Integrate [Spectre.Console](https://spectreconsole.net/) for modern terminal UI
