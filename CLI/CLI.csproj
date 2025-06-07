@@ -1,59 +1,70 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <!-- Output Configuration -->
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <ApplicationIcon>../icon.ico</ApplicationIcon>
         <AssemblyName>ResourceMerger</AssemblyName>
+        <RootNamespace>CLI</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>CLI</RootNamespace>
+
+        <!-- Project Metadata -->
         <Title>ResourceMerger</Title>
         <Authors>Biraru</Authors>
-        <Description>ResourceMerger is a .NET utility that merges embedded resources from one assembly into another.</Description>
-        <RepositoryUrl>https://github.com/BiraruStudios/ResourceMerger</RepositoryUrl>
-        <PackageId>ResourceMerger.CLI</PackageId>
-        <Copyright>Copyright © 2025 Biraru Studio's</Copyright>
-        <PackageProjectUrl>https://github.com/BiraruStudios/ResourceMerger</PackageProjectUrl>
-        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-        <RepositoryType>git</RepositoryType>
-        <PackageTags>resources;cli;merging;tools</PackageTags>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Company>Biraru Studios</Company>
         <Product>ResourceMerger.CLI</Product>
+        <Description>ResourceMerger is a .NET utility that merges embedded resources from one assembly into another.</Description>
+        <RepositoryUrl>https://github.com/BiraruStudios/ResourceMerger</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryBranch>main</RepositoryBranch>
+        <PackageId>ResourceMerger.CLI</PackageId>
+        <PackageTags>resources;cli;merging;tools</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/BiraruStudios/ResourceMerger</PackageProjectUrl>
+        <PackageReadmeFile>../README.md</PackageReadmeFile>
+
+        <!-- Versioning -->
         <Version>1.2.0</Version>
         <AssemblyVersion>1.2.0</AssemblyVersion>
         <FileVersion>1.2.0</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
-        <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>CLI.snk</AssemblyOriginatorKeyFile>
-        <PublicSign>true</PublicSign>
-        <PackageReadmeFile>../README.md</PackageReadmeFile>
+
+        <!-- Build and Publish -->
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
         <Deterministic>true</Deterministic>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <RepositoryBranch>main</RepositoryBranch>
+
+        <!-- Signing -->
+        <SignAssembly>true</SignAssembly>
+        <PublicSign>true</PublicSign>
+        <AssemblyOriginatorKeyFile>CLI.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <!-- Debug Configuration -->
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <DebugType>full</DebugType>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <!-- Release Configuration -->
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <Optimize>true</Optimize>
         <DebugType>pdbonly</DebugType>
         <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
+    <!-- Dependencies -->
     <ItemGroup>
         <PackageReference Include="Costura.Fody" Version="6.0.0">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="dnlib" Version="4.5.0" />
         <PackageReference Include="Fody" Version="6.9.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="dnlib" Version="4.5.0" />
         <PackageReference Include="Spectre.Console" Version="0.50.0" />
     </ItemGroup>
 
