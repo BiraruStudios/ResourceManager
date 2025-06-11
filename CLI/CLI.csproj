@@ -27,9 +27,9 @@
         <PackageReadmeFile>../README.md</PackageReadmeFile>
 
         <!-- Versioning -->
-        <Version>1.2.0</Version>
-        <AssemblyVersion>1.2.0</AssemblyVersion>
-        <FileVersion>1.2.0</FileVersion>
+        <Version>1.2.5</Version>
+        <AssemblyVersion>1.2.5</AssemblyVersion>
+        <FileVersion>1.2.5</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
 
         <!-- Build and Publish -->
