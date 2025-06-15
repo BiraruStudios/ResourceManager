@@ -1,0 +1,7 @@
+# Editor
+/.idea
+/.vs
+
+# Builds
+/CLI/bin
+/CLI/obj

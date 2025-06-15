@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Output Configuration -->
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ApplicationIcon>../icon.ico</ApplicationIcon>
+        <AssemblyName>ResourceManager</AssemblyName>
+        <RootNamespace>CLI</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <!-- Project Metadata -->
+        <Title>ResourceManager</Title>
+        <Authors>Biraru</Authors>
+        <Company>Biraru Studios</Company>
+        <Product>ResourceManager.CLI</Product>
+        <Description>ResourceManager is a .NET utility that lets you access embedded resources and modify them.</Description>
+        <RepositoryUrl>https://github.com/BiraruStudios/ResourceManager</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryBranch>main</RepositoryBranch>
+        <PackageId>ResourceManager.CLI</PackageId>
+        <PackageTags>resources;cli;merging;tools</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/BiraruStudios/ResourceManager</PackageProjectUrl>
+        <PackageReadmeFile>../README.md</PackageReadmeFile>
+
+        <!-- Versioning -->
+        <Version>2.0.0</Version>
+        <AssemblyVersion>2.0.0</AssemblyVersion>
+        <FileVersion>2.0.0</FileVersion>
+        <NeutralLanguage>en</NeutralLanguage>
+
+        <!-- Build and Publish -->
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <Deterministic>true</Deterministic>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+
+        <!-- Signing -->
+        <SignAssembly>true</SignAssembly>
+        <PublicSign>true</PublicSign>
+        <AssemblyOriginatorKeyFile>CLI.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
+
+    <!-- Debug Configuration -->
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <!-- Release Configuration -->
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <Optimize>true</Optimize>
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <!-- Dependencies -->
+    <ItemGroup>
+        <PackageReference Include="Costura.Fody" Version="6.0.0">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Fody" Version="6.9.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="dnlib" Version="4.5.0"/>
+        <PackageReference Include="Spectre.Console" Version="0.50.0"/>
+        <PackageReference Include="Spectre.Console.Cli" Version="0.50.0"/>
+    </ItemGroup>
+
+</Project>
