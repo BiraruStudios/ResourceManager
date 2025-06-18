@@ -1,6 +1,7 @@
+using CLI.Helpers;
 using Spectre.Console.Cli;
 
-namespace CLI;
+namespace CLI.Hooks;
 
 public class BeforeHook : ICommandInterceptor
 {
