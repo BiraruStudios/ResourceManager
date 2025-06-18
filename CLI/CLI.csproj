@@ -16,6 +16,7 @@
         <Company>Biraru Studios</Company>
         <Product>ResourceManager.CLI</Product>
         <Description>ResourceManager is a .NET utility that lets you access embedded resources and modify them.</Description>
+        <NeutralLanguage>en</NeutralLanguage>
         <RepositoryUrl>https://github.com/BiraruStudios/ResourceManager</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <RepositoryBranch>main</RepositoryBranch>
@@ -30,7 +31,6 @@
         <Version>2.0.0</Version>
         <AssemblyVersion>2.0.0</AssemblyVersion>
         <FileVersion>2.0.0</FileVersion>
-        <NeutralLanguage>en</NeutralLanguage>
 
         <!-- Build and Publish -->
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
