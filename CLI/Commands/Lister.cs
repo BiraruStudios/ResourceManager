@@ -62,7 +62,7 @@ public static class Lister
             }
             catch (NotSupportedException)
             {
-                AnsiConsole.Write(new Markup($"[yellow]Skipped serialized resource entries[/]").Centered());
+                AnsiConsole.Write(new Markup("[yellow]Skipped serialized resource entries[/]").Centered());
             }
             catch (Exception ex)
             {

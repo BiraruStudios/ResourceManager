@@ -21,12 +21,12 @@ public static class Merger
         var validation = TryValidatePaths(settings, out var targetPath, out var sourcePath);
         if (validation != 0)
             return validation;
-        
+
         var outputPath = Path.Combine(
             Path.GetDirectoryName(targetPath)!,
             Path.GetFileNameWithoutExtension(targetPath) + "_Merged" + Path.GetExtension(targetPath)
         );
-        
+
         try
         {
             var targetModule = ModuleDefMD.Load(targetPath);
@@ -56,7 +56,7 @@ public static class Merger
             return UIHelpers.PrintFatalError(ex, 6);
         }
     }
-    
+
     private static int EmbedResources(ModuleDefMD target, ModuleDefMD source)
     {
         var toEmbedList = source.Resources
@@ -76,7 +76,7 @@ public static class Merger
 
         return 0;
     }
-    
+
     private static void RemoveAssemblyLinkedResources(ModuleDefMD target, ModuleDefMD source)
     {
         var toRemove = target.Resources
@@ -99,12 +99,12 @@ public static class Merger
             target.Resources.Remove(resource);
         }
     }
-    
+
     private static int TryValidatePaths(MergeCommand.Settings settings, out string target, out string source)
     {
         target = Path.GetFullPath(settings.Target);
         source = Path.GetFullPath(settings.Source);
-        
+
         AnsiConsole.Write(new Markup($"[grey]Target Assembly:[/] [lightgreen]{target}[/]").Centered());
         AnsiConsole.Write(new Markup($"[grey]Source Assembly:[/] [lightgreen]{source}[/]").Centered());
 
