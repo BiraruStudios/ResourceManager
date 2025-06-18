@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using CLI.Commands;
+using CLI.Common;
+using CLI.Hooks;
 using Spectre.Console.Cli;
 
 namespace CLI;
