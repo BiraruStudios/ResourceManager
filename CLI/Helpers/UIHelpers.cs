@@ -1,6 +1,6 @@
 using Spectre.Console;
 
-namespace CLI;
+namespace CLI.Helpers;
 
 public static class UIHelpers
 {
