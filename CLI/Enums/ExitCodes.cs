@@ -1,4 +1,4 @@
-namespace CLI.Common;
+namespace CLI.Enums;
 
 public enum ExitCodes
 {

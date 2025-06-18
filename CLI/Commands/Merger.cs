@@ -1,4 +1,5 @@
 using CLI.Common;
+using CLI.Enums;
 using CLI.Helpers;
 using dnlib.DotNet;
 using dnlib.DotNet.Writer;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Resources;
 using CLI.Common;
+using CLI.Enums;
 using CLI.Helpers;
 using dnlib.DotNet;
 using Spectre.Console;
