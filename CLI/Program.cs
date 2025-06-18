@@ -15,7 +15,6 @@ public static class Program
             .Version?
             .ToString() ?? "Unknown";
 
-        commandApp.SetDefaultCommand<ListCommand>();
         commandApp.Configure(config =>
         {
             config.SetApplicationName(exeName);
