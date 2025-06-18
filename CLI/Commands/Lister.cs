@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Resources;
+using CLI.Common;
+using CLI.Helpers;
 using dnlib.DotNet;
 using Spectre.Console;
 
@@ -7,20 +9,10 @@ namespace CLI.Commands;
 
 public static class Lister
 {
-    /*
-     * Return Codes:
-     * 0 = Success
-     * 1 = Target file missing
-     * 2 = Invalid target extension
-     * 3 = Fatal Error
-     * 4 = No resources to list
-     * 5 = Failed to parse .resources
-     */
-
     public static int Execute(ListCommand.Settings settings)
     {
         var validation = TryValidatePaths(settings, out var targetPath);
-        if (validation != 0)
+        if (validation != (int)ExitCodes.Success)
             return validation;
 
         try
@@ -31,7 +23,7 @@ public static class Lister
         }
         catch (Exception e)
         {
-            return UIHelpers.PrintFatalError(e, 3);
+            return UIHelpers.PrintFatalError(e, (int)ExitCodes.FatalError);
         }
     }
 
@@ -40,7 +32,7 @@ public static class Lister
         var resources = module.Resources.OfType<EmbeddedResource>().ToList();
 
         if (resources.Count == 0)
-            return UIHelpers.PrintError("No resources to list.", 4);
+            return UIHelpers.PrintError("No resources to list.", (int)ExitCodes.NoResources);
 
         UIHelpers.WriteSpacer();
 
@@ -66,13 +58,13 @@ public static class Lister
             }
             catch (Exception ex)
             {
-                return UIHelpers.PrintFatalError(ex, 5);
+                return UIHelpers.PrintFatalError(ex, (int)ExitCodes.ResourceParseFailed);
             }
         }
 
         UIHelpers.WriteSpacer();
 
-        return 0;
+        return (int)ExitCodes.Success;
     }
 
     private static int TryValidatePaths(ListCommand.Settings settings, out string target)
@@ -82,12 +74,12 @@ public static class Lister
         AnsiConsole.Write(new Markup($"[grey]Target Assembly:[/] [lightgreen]{target}[/]").Centered());
 
         if (!File.Exists(target))
-            return UIHelpers.PrintError("Target file not found.", 1);
+            return UIHelpers.PrintError("Target file not found.", (int)ExitCodes.TargetMissing);
 
         // ReSharper disable once ConvertIfStatementToReturnStatement
         if (!Utils.IsValidExtension(Path.GetExtension(target)))
-            return UIHelpers.PrintError("Target file must be a .exe or a .dll.", 2);
+            return UIHelpers.PrintError("Target file must be a .exe or a .dll.", (int)ExitCodes.TargetExtensionInvalid);
 
-        return 0;
+        return (int)ExitCodes.Success;
     }
 }

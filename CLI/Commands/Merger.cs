@@ -1,3 +1,5 @@
+using CLI.Common;
+using CLI.Helpers;
 using dnlib.DotNet;
 using dnlib.DotNet.Writer;
 using Spectre.Console;
@@ -6,20 +8,10 @@ namespace CLI.Commands;
 
 public static class Merger
 {
-    /*
-     * Return Codes:
-     * 0 = Success
-     * 1 = Target file missing
-     * 2 = Source file missing
-     * 3 = Invalid target extension
-     * 4 = Invalid source extension
-     * 5 = Fatal error
-     * 6 = No Resource To Embed
-     */
     public static int Execute(MergeCommand.Settings settings)
     {
         var validation = TryValidatePaths(settings, out var targetPath, out var sourcePath);
-        if (validation != 0)
+        if (validation != (int)ExitCodes.Success)
             return validation;
 
         var outputPath = Path.Combine(
@@ -38,7 +30,7 @@ public static class Merger
             };
 
             var successEmbed = EmbedResources(targetModule, sourceModule);
-            if (successEmbed != 0)
+            if (successEmbed != (int)ExitCodes.Success)
                 return successEmbed;
 
             RemoveAssemblyLinkedResources(targetModule, sourceModule);
@@ -49,11 +41,11 @@ public static class Merger
             AnsiConsole.Write(new Markup($"[lightgreen]Merged output saved to: {outputPath}[/]").Centered());
             UIHelpers.WriteSpacer();
 
-            return 0;
+            return (int)ExitCodes.Success;
         }
         catch (Exception ex)
         {
-            return UIHelpers.PrintFatalError(ex, 6);
+            return UIHelpers.PrintFatalError(ex, (int)ExitCodes.FatalError);
         }
     }
 
@@ -63,7 +55,7 @@ public static class Merger
             .OfType<EmbeddedResource>()
             .ToList();
 
-        if (toEmbedList.Count == 0) return UIHelpers.PrintError("No resources to embed.", 6);
+        if (toEmbedList.Count == 0) return UIHelpers.PrintError("No resources to embed.", (int)ExitCodes.NoResourceToEmbed);
 
         UIHelpers.WriteSpacer();
 
@@ -74,7 +66,7 @@ public static class Merger
             target.Resources.Add(new EmbeddedResource(resource.Name, data, resource.Attributes));
         }
 
-        return 0;
+        return (int)ExitCodes.Success;
     }
 
     private static void RemoveAssemblyLinkedResources(ModuleDefMD target, ModuleDefMD source)
@@ -109,17 +101,17 @@ public static class Merger
         AnsiConsole.Write(new Markup($"[grey]Source Assembly:[/] [lightgreen]{source}[/]").Centered());
 
         if (!File.Exists(target))
-            return UIHelpers.PrintError("Target file not found.", 1);
+            return UIHelpers.PrintError("Target file not found.", (int)ExitCodes.TargetMissing);
 
         if (!File.Exists(source))
-            return UIHelpers.PrintError("Source file not found.", 2);
+            return UIHelpers.PrintError("Source file not found.", (int)ExitCodes.SourceMissing);
 
         if (!Utils.IsValidExtension(Path.GetExtension(target)))
-            return UIHelpers.PrintError("Target file must be a .exe or a .dll.", 3);
+            return UIHelpers.PrintError("Target file must be a .exe or a .dll.", (int)ExitCodes.TargetExtensionInvalid);
 
         if (!Utils.IsValidExtension(Path.GetExtension(source)))
-            return UIHelpers.PrintError("Source file must be a .exe or a .dll.", 4);
+            return UIHelpers.PrintError("Source file must be a .exe or a .dll.", (int)ExitCodes.SourceExtensionInvalid);
 
-        return 0;
+        return (int)ExitCodes.Success;
     }
 }
