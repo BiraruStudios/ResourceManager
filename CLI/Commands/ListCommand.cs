@@ -3,6 +3,7 @@ using Spectre.Console.Cli;
 
 namespace CLI.Commands;
 
+[Description("Lists all embedded resources in the target assembly.")]
 // ReSharper disable once ClassNeverInstantiated.Global
 public class ListCommand : Command<ListCommand.Settings>
 {

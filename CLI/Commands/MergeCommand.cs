@@ -3,6 +3,7 @@ using Spectre.Console.Cli;
 
 namespace CLI.Commands;
 
+[Description("Embeds all resources from the source assembly into the target assembly.")]
 // ReSharper disable once ClassNeverInstantiated.Global
 public class MergeCommand : Command<MergeCommand.Settings>
 {
