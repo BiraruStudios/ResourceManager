@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace CLI;
+namespace CLI.Common;
 
 public static class Utils
 {
