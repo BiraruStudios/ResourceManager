@@ -9,7 +9,7 @@ public static class UIHelpers
         WriteSpacer();
         AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
         WriteSpacer();
-        AnsiConsole.Write(new FigletText("ResourceMerger").Centered().Color(Color.Yellow));
+        AnsiConsole.Write(new FigletText("ResourceManager").Centered().Color(Color.Yellow));
         WriteSpacer();
         AnsiConsole.Write(new Rule().RuleStyle("grey").Centered());
         WriteSpacer();
