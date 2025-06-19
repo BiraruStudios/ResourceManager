@@ -24,5 +24,10 @@ public class MergeCommand : Command<MergeCommand.Settings>
         [Description("Source assembly to merge from")]
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public required string Source { get; set; }
+
+        [CommandOption("-o|--output")]
+        [Description("The merged assembly to output")]
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public string? Output { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using CLI.Common;
 using CLI.Enums;
 using CLI.Helpers;
 using dnlib.DotNet;
-using Spectre.Console;
 
 namespace CLI.Commands;
 
@@ -18,9 +17,14 @@ public static class Lister
 
         try
         {
-            var targetModule = ModuleDefMD.Load(targetPath);
+            using var targetModule = AssemblyHelpers.LoadAssembly(targetPath);
 
             return PrintResources(targetModule);
+        }
+        catch (BadImageFormatException)
+        {
+            return UIHelpers.PrintError("The target file is not a valid .NET assembly.",
+                (int)ExitCodes.TargetInvalidDotNetAssembly);
         }
         catch (Exception e)
         {
@@ -39,7 +43,7 @@ public static class Lister
 
         foreach (var resource in resources)
         {
-            AnsiConsole.Write(new Markup($"[aqua]{resource.Name}[/]").Centered());
+            UIHelpers.WriteInfo($"[aqua]{resource.Name}[/]");
 
             if (!resource.Name.EndsWith(".resources", StringComparison.OrdinalIgnoreCase)) continue;
 
@@ -51,11 +55,11 @@ public static class Lister
             {
                 using var resourceSet = new ResourceSet(ms);
                 foreach (DictionaryEntry entry in resourceSet)
-                    AnsiConsole.Write(new Markup($"[grey]- {entry.Key}[/]").Centered());
+                    UIHelpers.WriteInfo($"[grey]- {entry.Key}[/]");
             }
             catch (NotSupportedException)
             {
-                AnsiConsole.Write(new Markup("[yellow]Skipped serialized resource entries[/]").Centered());
+                UIHelpers.WriteInfo("[yellow]Skipped serialized resource entries[/]");
             }
             catch (Exception ex)
             {
@@ -72,7 +76,7 @@ public static class Lister
     {
         target = Path.GetFullPath(settings.Target);
 
-        AnsiConsole.Write(new Markup($"[grey]Target Assembly:[/] [lightgreen]{target}[/]").Centered());
+        UIHelpers.WriteInfo($"[grey]Target Assembly:[/] [lightgreen]{target}[/]");
 
         if (!File.Exists(target))
             return UIHelpers.PrintError("Target file not found.", (int)ExitCodes.TargetMissing);

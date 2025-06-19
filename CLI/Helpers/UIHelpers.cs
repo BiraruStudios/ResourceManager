@@ -20,8 +20,8 @@ public static class UIHelpers
         WriteSpacer();
         AnsiConsole.Write(new Rule().RuleStyle("red dim").Centered());
         WriteSpacer();
-        AnsiConsole.Write(new Markup("[red bold]Error:[/]").Centered());
-        AnsiConsole.Write(new Markup($"[yellow]{message}[/]").Centered());
+        WriteInfo("[red bold]Error:[/]");
+        WriteInfo($"[yellow]{message}[/]");
         WriteSpacer();
         AnsiConsole.Write(new Rule().RuleStyle("red dim").Centered());
         WriteSpacer();
@@ -33,12 +33,17 @@ public static class UIHelpers
         WriteSpacer();
         AnsiConsole.Write(new Rule().RuleStyle("red dim").Centered());
         WriteSpacer();
-        AnsiConsole.Write(new Markup("[red bold]Fatal error occurred:[/]").Centered());
-        AnsiConsole.Write(new Markup($"[grey]{ex.GetType().Name}[/]: [yellow]{ex.Message}[/]").Centered());
+        WriteInfo("[red bold]Fatal error occurred:[/]");
+        WriteInfo($"[grey]{ex.GetType().Name}[/]: [yellow]{ex.Message}[/]");
         WriteSpacer();
         AnsiConsole.Write(new Rule().RuleStyle("red dim").Centered());
         WriteSpacer();
         return code;
+    }
+
+    public static void WriteInfo(string message)
+    {
+        AnsiConsole.Write(new Markup($"[grey]{message}[/]").Centered());
     }
 
     public static void WriteSpacer()
