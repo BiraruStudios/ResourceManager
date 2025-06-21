@@ -1,5 +1,23 @@
 # Changelog
 
+## 🚀 v2.0.0 – Namespace Refactor, Command Cleanup & Versioning Overhaul
+
+* 🧾 **Chore:** Bump version and update `CHANGELOG.md`
+* ✨ **Feat + Fix:** Add multiple new features and fixes (see individual commits for details)
+* 🐛 **Fix:** Rename `ResourceMerger` to `ResourceManager`
+* 🧠 **Refactor:** Move `ExitCodes` to `Enums` namespace
+* 🧾 **Chore:** Update `AssemblyVersion` and `FileVersion` to full four-part format
+* 🧼 **Chore:** Reorder `NeutralLanguage` in `CLI.csproj` for clarity
+* 🧠 **Refactor:** Use `ExitCodes` enum and shared helpers in `MergerCommand` and `ListerCommand`
+* 🧾 **Chore:** Update `Program.cs` to import utilities and hooks from new namespaces
+* 🧠 **Refactor:** Move `BeforeHook` to `Hooks` namespace
+* 🧠 **Refactor:** Move `UIHelpers` to `Helpers` namespace
+* 🧠 **Refactor:** Add `ExitCodes` and move utility classes to `Common` namespace
+* 🔥 **Refactor:** Remove default command from program configuration
+* 📝 **Docs:** Add usage descriptions to `list` and `merge` commands
+* 🧼 **Chore:** Reformat codebase for style and consistency
+* 🎉 **Chore:** Initial commit
+
 ## 🧰 v1.2.5 – Command Modularization, Visual Polish & Project Cleanup
 
 * 🧾 **Chore:** Bump version and update `CHANGELOG.md`
